@@ -241,6 +241,8 @@ _.'  .  :  '-._</span>
     <div class="signup-action">
       <a href="#inscripcion" class="cta">$ sudo inscribirme <span aria-hidden="true">↵</span></a>
       <span class="signup-pass">[sudo] contraseña para vos: ••••••••</span>
+      <button type="button" class="btn-rm" id="rm-btn">$ sudo rm -rf /* --no-preserve-root</button>
+      <span class="signup-micro" id="rm-micro" aria-live="polite">no lo toques. (tocalo.)</span>
     </div>
   </div>
 </section>
@@ -250,6 +252,19 @@ _.'  .  :  '-._</span>
   <span>14 &amp; 15 OCT. 2026 · Tandil, Argentina · <a href="https://instagram.com/tandiltechweek">@tandiltechweek</a></span>
 </footer>
 
+</div>
+
+<!-- Kernel panic: fuera de .page para poder volver inert el resto mientras está abierto -->
+<div class="sr-only" id="panic-live" aria-live="assertive"></div>
+<div class="panic" id="panic" role="alertdialog" aria-modal="true" aria-label="Kernel panic: el sistema se rompió" tabindex="-1" hidden>
+  <div class="panic-inner">
+    <div class="panic-log" id="panic-log"></div>
+    <div class="panic-prompt" id="panic-prompt" hidden>
+      <label for="initramfs" class="panic-label">(initramfs)</label>
+      <input id="initramfs" class="panic-input" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" aria-describedby="panic-hint">
+    </div>
+    <p class="panic-hint" id="panic-hint" hidden>pista: escribí inscribirme y apretá Enter. sí, es obligatorio. no, no hay otra.</p>
+  </div>
 </div>
 </body>
 </html>
