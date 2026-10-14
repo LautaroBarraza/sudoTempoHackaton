@@ -12,9 +12,7 @@ Ojo: la página está cargada de memes sobre los servidores caídos de la hackat
 
 - **Hero 503:** el número con glitch, una terminal que corre `nmap` contra los días del evento y un cursor que parpadea.
 - **La Piedra Movediza en ASCII:** se mece sobre las sierras de Tandil y su textura cambia sola. El botón `$ empujar --fuerte` la sacude (no se cae, es la réplica de 2007).
-  - **Ciudad de fondo con parallax:** detrás de la piedra está Tandil en ASCII (el Castillo Morisco, la iglesia y la cruz del Calvario). Al mover el mouse, nubes, ciudad, estrellas y piedra se desplazan a distintas velocidades, y el HUD muestra el ángulo `θ`.
 - **Movediza Farm:** un clicker en el que cada click a la piedra larga tokens. Hay mejoras para comprar (café del campus, prompts bien escritos, agentes en loop…) y una que no hace nada: el server de la hackatón. El progreso se guarda en el navegador.
-  - **La piedra explota:** a medida que farmeás, baja su integridad, se agrieta, cambia de color y tiembla. A los 25.000 tokens explota en pedazos con un "BOOM" y el municipio te indemniza. Después `$ reconstruir --replica` la levanta como réplica con multiplicador (x2, x3…). Cada réplica aguanta el triple que la anterior (75.000, 225.000…), así que cada ciclo cuesta más.
 - **`$ sudo rm -rf /* --no-preserve-root`:** un botón que "borra todo" y tira un kernel panic. La única forma de volver es escribir `inscribirme` en la consola.
 - **Info del evento:** agenda (Hacking Day y Startup Day), speakers, organizadores, sponsors e inscripción.
 

@@ -49,40 +49,24 @@ $ sudo construir --lo-que-viene<span class="cur">█</span></pre>
 </section>
 
 <section aria-label="La Piedra Movediza en ASCII" class="movediza">
-  <div class="scene" id="scene">
-    <div class="scene-bar"><span>$ watch -n1 movediza --tandil</span><span>-37.32, -59.13 · θ <span class="lime" id="scene-angle">0</span>°</span></div>
+  <div class="scene">
+    <div class="scene-bar"><span>$ watch -n1 movediza --tandil</span><span>-37.32, -59.13</span></div>
     <div class="scan" aria-hidden="true"></div>
-    <!-- Capas de parallax: el contenedor se desplaza y adentro siguen el drift y el titileo -->
-    <div class="plx plx-layer" id="plx-clouds" aria-hidden="true">
-<pre class="cloud c1">   .--.
+<pre class="cloud c1" aria-hidden="true">   .--.
  .(    ).
 (___.__)__)</pre>
-<pre class="cloud c2">  .-~~-.
+<pre class="cloud c2" aria-hidden="true">  .-~~-.
  (      )_
 (_________)</pre>
-    </div>
-    <div class="plx plx-layer" id="plx-stars" aria-hidden="true">
-      <span class="tw star star-1">*</span>
-      <span class="tw d2 star star-2">+</span>
-      <span class="tw d3 star star-3 star-yellow">.</span>
-      <span class="tw d2 star star-4">.</span>
-      <span class="tw star star-5 star-yellow">*</span>
-      <span class="tw d3 star star-6">+</span>
-    </div>
+    <span class="tw star star-1" aria-hidden="true">*</span>
+    <span class="tw d2 star star-2" aria-hidden="true">+</span>
+    <span class="tw d3 star star-3 star-yellow" aria-hidden="true">.</span>
+    <span class="tw d2 star star-4" aria-hidden="true">.</span>
+    <span class="tw star star-5 star-yellow" aria-hidden="true">*</span>
+    <span class="tw d3 star star-6" aria-hidden="true">+</span>
     <div class="scene-stage">
-      <div role="img" aria-label="La Piedra Movediza dibujada con caracteres ASCII, balanceándose sobre las sierras con la ciudad de Tandil de fondo" class="scene-art">
-<pre class="plx city" id="plx-city" aria-hidden="true">                                                                                                   |
-         _ _ _                                                                                   --+--
-        |_|_|_|                                                        ___                         |
-        | ._. |            ______                +       +        ___ |: :|                        |
-        | |_| |           |:: ::|               /^\     /^\      |# #||: :| _____              _/^\_
-       _|_____|_          |:: ::|  ____         | |_____| |      |# #||: :||:: ::|          _.'  :  '._
-     _.-'-----'-._        |:: ::| |# #|         |[]  /\ []|      |# #||: :||:: ::| ___   _.'  .    .   '._
-  _.'   .    :    '._     |:: ::| |# #|___      |  |    |  |     |# #||: :||:: ::||# #| '   :    .    :    '-.
-_'   :     .    .    '-.__|:: ::|_|# #|: :|     |[]| [] |[]|    _|# #||: :||:: ::||# #|_.    .    :     .     '
-.__.__.__.__.__.__.__.__.__.__.__.__.__.__.__.__|__|_||_|__|___.__.__.__.__.__.__.__.__.__.__.__.__.__.__.__.__.</pre>
-        <div class="plx scene-front" id="plx-front">
-          <div class="rock">
+      <div role="img" aria-label="La Piedra Movediza dibujada con caracteres ASCII, balanceándose sobre las sierras de Tandil" class="scene-art">
+        <div class="rock">
 <pre class="rock-ascii" id="rock-ascii">          _.--~~~--._
        .-'  :   .    '~--.._
      /        `   ·   '     '~--.._
@@ -94,13 +78,12 @@ _'   :     .    .    '-.__|:: ::|_|# #|: :|     |[]| [] |[]|    _|# #||: :||:: :
        \  ·   '   :    _.-'
         '.  .   :  _.-'
           '-.._.-'</pre>
-          </div>
+        </div>
 <pre class="sierras">         _.-~~-._                         _.-~~-.
      _.-'  .     '-._                 _.-'   .   '-.
   _.'   .     :    .  '-.__      _.--'   :     .    '-.
  /   .    :      .    :    '~--~'    .      :    .    :'.
 /  :    .    .     :     .    :    .    :     .     :    \</pre>
-        </div>
       </div>
     </div>
     <div class="scene-status">
@@ -152,11 +135,6 @@ _'   :     .    .    '-.__|:: ::|_|# #|: :|     |[]| [] |[]|    _|# #||: :||:: :
           <span class="farm-count" id="farm-count">0</span>
           <span class="farm-stats">tokens farmeados · <span class="yellow"><span id="farm-persec">0</span>/seg</span> · <span id="farm-perclick">1</span> por click</span>
         </div>
-        <div class="farm-integ">
-          <div class="integ-head"><span>integridad de la piedra</span><span class="integ-pct" id="farm-integ-pct">100%</span></div>
-          <div class="integ-bar" id="farm-integ-bar" aria-hidden="true">██████████████</div>
-          <span class="integ-warn" id="farm-integ-warn" role="status"></span>
-        </div>
         <div class="farm-stage" id="farm-stage">
           <button type="button" class="farm-rock" id="farm-rock" aria-label="Clickear la Piedra Movediza para farmear tokens">
             <span class="farm-sprite" aria-hidden="true">
@@ -173,34 +151,6 @@ _.'  .  :  '-._</span>
             </span>
             <span class="farm-hint">dale click para farmear tokens</span>
           </button>
-          <!-- Explosión: se muestra durante ~1.9s; los fragmentos y tokens se crean en JS -->
-          <div class="farm-boom" id="farm-boom" aria-hidden="true" hidden>
-            <div class="farm-sprite">
-              <div class="boom-frags" id="boom-frags"></div>
-<pre class="farm-base">   _.-~~-._
-_.'  .  :  '-._</pre>
-            </div>
-            <span class="boom-label">¡¡¡BOOM!!!</span>
-<pre class="boom-ascii"> ____   ___   ___  __  __
-| __ ) / _ \ / _ \|  \/  |
-|  _ \| | | | | | | |\/| |
-| |_) | |_| | |_| | |  | |
-|____/ \___/ \___/|_|  |_|</pre>
-            <div class="boom-flash"></div>
-          </div>
-          <div class="farm-rubble" id="farm-rubble" hidden>
-            <div class="farm-sprite" aria-hidden="true">
-<pre class="rubble-rip">   R.I.P.  1912 · 2007 · hoy
-     .  ,  `  .  '  ,
-   ' ,. ;_ .,  ,'. .
-   _.,-'.;_,.-'._.,</pre>
-<pre class="farm-base">   _.-~~-._
-_.'  .  :  '-._</pre>
-            </div>
-            <button type="button" class="btn-rebuild" id="farm-rebuild">$ reconstruir --replica</button>
-            <span class="rubble-next" id="farm-next">réplica #1 · multiplicador x2</span>
-            <span class="rubble-hint" id="farm-next-hint">la próxima aguanta hasta 75.000 tokens.</span>
-          </div>
         </div>
         <span class="farm-milestone" aria-live="polite">&gt; <span id="farm-milestone">la piedra te mira. clickeala.</span></span>
       </div>
