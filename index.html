@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TTW · Error 503</title>
+<meta name="description" content="Los servers de la hackatón no levantaron. La Tandil Tech Week sí. 14 &amp; 15 de octubre, Tandil.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;800&amp;family=IBM+Plex+Mono:ital,wght@0,400;0,600;1,400&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./styles.css">
+<script src="./main.js" defer></script>
+</head>
+<body>
+<div class="page">
+
+<header class="site-header">
+  <span class="prompt">tandiltechweek<span class="lime">@2026</span>:~$</span>
+  <nav aria-label="Principal" class="nav">
+    <a href="#agenda" class="nav-link">./agenda</a>
+    <a href="#speakers" class="nav-link">./speakers</a>
+    <a href="#organizan" class="nav-link">./organizan</a>
+    <a href="#acompanan" class="nav-link">./acompañan</a>
+    <a href="#inscripcion" class="nav-link nav-cta">sudo inscribirme</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="hero-copy">
+    <div class="code-503 gl">503</div>
+    <div class="status-line"><s class="muted">Service Unavailable</s> <b class="lime">Service Inevitable</b></div>
+    <h1 class="hero-title">Los servers de la hackatón no levantaron.<br><span class="lime">La Tandil Tech Week sí.</span></h1>
+    <p class="hero-lead">14 &amp; 15 de octubre. Un encuentro para <i>construir lo que viene</i> — aunque el puerto 443 opine distinto.</p>
+  </div>
+  <div class="terminal">
+    <div class="terminal-bar"><span>●</span><span>●</span><span>●</span><span class="terminal-title">zsh — nmap</span></div>
+<pre class="terminal-body">$ nmap -p 14,15,443 tandil.tech
+
+PORT      STATE     SERVICE
+<span class="lime">14/oct    open      hacking-day</span>
+          └ UNICEN Campus
+<span class="lime">15/oct    open      startup-day</span>
+          └ Distrito Avellaneda
+<span class="pink">443/tcp   filtered  servers-de-la-hackaton</span>
+          └ ¯\_(ツ)_/¯
+
+$ sudo construir --lo-que-viene<span class="cur">█</span></pre>
+  </div>
+</section>
+
+<section aria-label="La Piedra Movediza en ASCII" class="movediza">
+  <div class="scene">
+    <div class="scene-bar"><span>$ watch -n1 movediza --tandil</span><span>-37.32, -59.13</span></div>
+    <div class="scan" aria-hidden="true"></div>
+<pre class="cloud c1" aria-hidden="true">   .--.
+ .(    ).
+(___.__)__)</pre>
+<pre class="cloud c2" aria-hidden="true">  .-~~-.
+ (      )_
+(_________)</pre>
+    <span class="tw star star-1" aria-hidden="true">*</span>
+    <span class="tw d2 star star-2" aria-hidden="true">+</span>
+    <span class="tw d3 star star-3 star-yellow" aria-hidden="true">.</span>
+    <span class="tw d2 star star-4" aria-hidden="true">.</span>
+    <span class="tw star star-5 star-yellow" aria-hidden="true">*</span>
+    <span class="tw d3 star star-6" aria-hidden="true">+</span>
+    <div class="scene-stage">
+      <div role="img" aria-label="La Piedra Movediza dibujada con caracteres ASCII, balanceándose sobre las sierras de Tandil" class="scene-art">
+        <div class="rock">
+<pre class="rock-ascii" id="rock-ascii">          _.--~~~--._
+       .-'  :   .    '~--.._
+     /        `   ·   '     '~--.._
+    |   :   .   :   .       `      '~-._
+    |  ·    '   :   .   :   .          '.
+    |    `   ·   '   :   .   :   .  _.-'
+     \      `   ·   '   :   .   _.-'
+      \    :   .       `    _.-'
+       \  ·   '   :    _.-'
+        '.  .   :  _.-'
+          '-.._.-'</pre>
+        </div>
+<pre class="sierras">         _.-~~-._                         _.-~~-.
+     _.-'  .     '-._                 _.-'   .   '-.
+  _.'   .     :    .  '-.__      _.--'   :     .    '-.
+ /   .    :      .    :    '~--~'    .      :    .    :'.
+/  :    .    .     :     .    :    .    :     .     :    \</pre>
+      </div>
+    </div>
+    <div class="scene-status">
+      <div class="scene-info">
+        <span aria-live="polite">estado: <b class="lime" id="rock-estado">oscilando (como siempre)</b></span>
+        <span class="muted">empujones: <span id="rock-pushes">0</span> · servers de la hackatón: <span class="pink">siguen caídos</span></span>
+      </div>
+      <button type="button" class="btn-push" id="rock-push">$ empujar --fuerte</button>
+    </div>
+    <p class="scene-note">La original se cayó en 1912. La réplica se banca el viento desde 2007. Los servers de hoy no llegaron ni al mediodía.</p>
+  </div>
+</section>
+
+<section aria-label="Log de temas" class="marquee">
+  <div class="mq">
+    <span><b class="lime">[OK]</b> UNICEN Campus  <b class="lime">[OK]</b> Distrito Avellaneda  <b class="lime">[OK]</b> Hacking Day  <b class="yellow">[WARN]</b> Ciberseguridad (sin puertos)  <b class="lime">[OK]</b> Startup Day  <b class="lime">[OK]</b> Agritech &amp; Bio  <b class="lime">[OK]</b> Software &amp; AI  <b class="lime">[OK]</b> Venture Capital  <b class="lime">[OK]</b> Polo Científico  <b class="lime">[OK]</b> Founders &amp; Builders  </span>
+    <span aria-hidden="true"><b class="lime">[OK]</b> UNICEN Campus  <b class="lime">[OK]</b> Distrito Avellaneda  <b class="lime">[OK]</b> Hacking Day  <b class="yellow">[WARN]</b> Ciberseguridad (sin puertos)  <b class="lime">[OK]</b> Startup Day  <b class="lime">[OK]</b> Agritech &amp; Bio  <b class="lime">[OK]</b> Software &amp; AI  <b class="lime">[OK]</b> Venture Capital  <b class="lime">[OK]</b> Polo Científico  <b class="lime">[OK]</b> Founders &amp; Builders  </span>
+  </div>
+</section>
+
+<section id="agenda" class="section section-agenda">
+  <div class="cmd">$ ps aux | grep techweek</div>
+  <h2 class="section-title">Dos procesos corriendo</h2>
+  <div class="process-grid">
+    <article class="process process-lime">
+      <div class="process-head"><span>PID 14</span><span class="badge badge-lime">RUNNING</span></div>
+      <h3 class="process-name">hacking-day</h3>
+      <div class="process-args">--fecha=14/10 --lugar="UNICEN Campus"</div>
+      <p class="process-desc">Competencia por equipos de ciberseguridad. Una forma divertida de aprender con amigos. Si el server no levanta, eso también es un desafío.</p>
+    </article>
+    <article class="process process-blue">
+      <div class="process-head"><span>PID 15</span><span class="badge badge-white">QUEUED</span></div>
+      <h3 class="process-name">startup-day</h3>
+      <div class="process-args">--fecha=15/10 --lugar="Distrito Avellaneda"</div>
+      <p class="process-desc">Charlas dinámicas y networking entre founders, venture capital y estudiantes. Sin firewall entre ideas y plata.</p>
+    </article>
+  </div>
+</section>
+
+<section id="clicker" aria-label="Movediza Farm: farmeá tokens" class="clicker">
+  <div class="farm">
+    <div class="farm-head">
+      <h2 class="farm-title">¿Mucho texto? <span class="lime">Divertite con esto.</span></h2>
+      <span class="farm-version">movediza_farm.exe · v0.1.4.15</span>
+    </div>
+    <div class="farm-body">
+      <div class="farm-main">
+        <div class="farm-score">
+          <span class="farm-count" id="farm-count">0</span>
+          <span class="farm-stats">tokens farmeados · <span class="yellow"><span id="farm-persec">0</span>/seg</span> · <span id="farm-perclick">1</span> por click</span>
+        </div>
+        <div class="farm-stage" id="farm-stage">
+          <button type="button" class="farm-rock" id="farm-rock" aria-label="Clickear la Piedra Movediza para farmear tokens">
+            <span class="farm-sprite" aria-hidden="true">
+              <span class="farm-sway">
+<span class="farm-stone" id="farm-stone">     _.-~~-._
+   .'  .  :  '~-._
+  |  :  .  :  .   '-.
+  |   .  :  .  : _.-'
+   \  :  .  _.-'
+    '-._.-'</span>
+              </span>
+<span class="farm-base">   _.-~~-._
+_.'  .  :  '-._</span>
+            </span>
+            <span class="farm-hint">dale click para farmear tokens</span>
+          </button>
+        </div>
+        <span class="farm-milestone" aria-live="polite">&gt; <span id="farm-milestone">la piedra te mira. clickeala.</span></span>
+      </div>
+      <div class="farm-shop">
+        <span class="farm-label">$ apt install mejoras</span>
+        <button type="button" class="upgrade" data-id="cafe" disabled>
+          <span class="upgrade-info">
+            <b class="upgrade-name">Café del campus <span class="upgrade-owned">×0</span></b>
+            <span class="upgrade-desc">+1 token/seg</span>
+          </span>
+          <span class="upgrade-cost">15</span>
+        </button>
+        <button type="button" class="upgrade" data-id="prompt" disabled>
+          <span class="upgrade-info">
+            <b class="upgrade-name">Prompt bien escrito <span class="upgrade-owned">×0</span></b>
+            <span class="upgrade-desc">+1 token por click</span>
+          </span>
+          <span class="upgrade-cost">40</span>
+        </button>
+        <button type="button" class="upgrade" data-id="agente" disabled>
+          <span class="upgrade-info">
+            <b class="upgrade-name">Agente en loop <span class="upgrade-owned">×0</span></b>
+            <span class="upgrade-desc">+8 tokens/seg</span>
+          </span>
+          <span class="upgrade-cost">120</span>
+        </button>
+        <button type="button" class="upgrade" data-id="cluster" disabled>
+          <span class="upgrade-info">
+            <b class="upgrade-name">Cluster que sí levanta <span class="upgrade-owned">×0</span></b>
+            <span class="upgrade-desc">+40 tokens/seg</span>
+          </span>
+          <span class="upgrade-cost">900</span>
+        </button>
+        <button type="button" class="upgrade" data-id="server" disabled>
+          <span class="upgrade-info">
+            <b class="upgrade-name">Server de la hackatón <span class="upgrade-owned">×0</span></b>
+            <span class="upgrade-desc">no hace nada. como hoy.</span>
+          </span>
+          <span class="upgrade-cost">5.000</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="speakers" class="section section-speakers">
+  <div class="cmd">$ cat speakers.txt</div>
+  <h2 class="section-title">Próximamente nuevas voces</h2>
+  <p class="speakers-msg">cat: speakers.txt: archivo en curaduría — producto, ciencia y capital. Reintentá más tarde.</p>
+</section>
+
+<section id="organizan" class="section section-list">
+  <div class="cmd">$ ls -la /organizan</div>
+  <h2 class="section-title">Organizan</h2>
+  <div class="table-wrap">
+    <table class="orgs">
+      <thead>
+        <tr><th>permisos</th><th>nombre</th><th>tipo</th><th>descripción</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="perm">drwxr-xr-x</td><td class="name"><a href="#organizan">picante.fund/</a></td><td class="tag">VC Fund</td><td class="desc">Invierte en founders latinoamericanos AI-native.</td></tr>
+        <tr><td class="perm">drwxr-xr-x</td><td class="name"><a href="#organizan">relaw/</a></td><td class="tag">Venture Legal</td><td class="desc">Partner legal para startups y empresas tech.</td></tr>
+        <tr><td class="perm">drwxr-xr-x</td><td class="name"><a href="#organizan">paisanos/</a></td><td class="tag">Product Studio</td><td class="desc">Estudio global de diseño y desarrollo de producto.</td></tr>
+        <tr><td class="perm">drwxr-xr-x</td><td class="name"><a href="#organizan">hacktandil/</a></td><td class="tag">Community</td><td class="desc">Comunidad tech de Tandil: meetups y hackatones.</td></tr>
+        <tr><td class="perm">drwxr-xr-x</td><td class="name"><a href="#organizan">geonosis/</a></td><td class="tag">Tech Partner</td><td class="desc">Idea to Scale: soporte técnico y de producto.</td></tr>
+        <tr><td class="perm">drwxr-xr-x</td><td class="name"><a href="#organizan">fardo/</a></td><td class="tag">Brand Intelligence</td><td class="desc">Cómo aparecen las marcas en asistentes de IA.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="acompanan" class="section section-list">
+  <div class="cmd">$ cat /etc/acompanan</div>
+  <div class="sponsors">
+    <a href="#acompanan" class="sponsor">Grupo Rotonda</a>
+    <a href="#acompanan" class="sponsor">The Red Guild</a>
+    <a href="#acompanan" class="sponsor">Payoneer</a>
+  </div>
+</section>
+
+<section id="inscripcion" class="signup">
+  <div class="signup-inner">
+    <div class="signup-copy">
+      <span class="signup-kicker">INSCRIPCIONES 2026 · uptime: 0 días 00:00:00</span>
+      <h2 class="signup-title">Construyamos juntos lo que viene.</h2>
+      <p class="signup-lead">Hacking Day, Startup Day o los dos. No pedimos root, solo ganas.</p>
+    </div>
+    <div class="signup-action">
+      <a href="#inscripcion" class="cta">$ sudo inscribirme <span aria-hidden="true">↵</span></a>
+      <span class="signup-pass">[sudo] contraseña para vos: ••••••••</span>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <span>$ exit 0</span>
+  <span>14 &amp; 15 OCT. 2026 · Tandil, Argentina · <a href="https://instagram.com/tandiltechweek">@tandiltechweek</a></span>
+</footer>
+
+</div>
+</body>
+</html>
