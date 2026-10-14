@@ -766,7 +766,13 @@ a:hover { color: var(--white); }
 .frag {
   position: absolute;
   white-space: pre;
-  animation: var(--anim) var(--dur) cubic-bezier(.15, .8, .3, 1) var(--delay) forwards;
+  /* Longhands en vez del shorthand con var(): cada una se resuelve sola y no depende
+     de que el navegador parsee bien un shorthand con nombre de animación variable */
+  animation-name: var(--anim);
+  animation-duration: var(--dur);
+  animation-timing-function: cubic-bezier(.15, .8, .3, 1);
+  animation-delay: var(--delay);
+  animation-fill-mode: forwards;
 }
 .frag-c0,
 .frag-c3 { color: var(--lime); }

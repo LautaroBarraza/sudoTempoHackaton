@@ -84,13 +84,17 @@
 
   function px(v) { return v.toFixed(1) + 'px'; }
   function clamp1(v) { return Math.max(-1, Math.min(1, v)); }
+  // Cada capa es opcional: si falta una (HTML viejo en caché), las demás siguen
+  function setTransform(el, v) { if (el) el.style.transform = v; }
 
-  // Cada capa a su velocidad: lo lejano se mueve más y la piedra va en sentido contrario
+  // Cada capa a su velocidad: lo lejano se mueve más y la piedra va en sentido contrario.
+  // La ciudad repite el translate(-50%, 0) del CSS y suma el desplazamiento aparte (sin calc()),
+  // así la transición interpola función por función en todos los navegadores
   function setParallax(mx, my) {
-    plxClouds.style.transform = 'translate(' + px(-mx * 60) + ', ' + px(-my * 14) + ')';
-    plxCity.style.transform = 'translate(calc(-50% + ' + px(-mx * 36) + '), ' + px(-my * 10) + ') rotate(' + (mx * 1.2).toFixed(2) + 'deg)';
-    plxStars.style.transform = 'translate(' + px(-mx * 18) + ', ' + px(-my * 8) + ')';
-    plxFront.style.transform = 'translate(' + px(mx * 8) + ', ' + px(my * 4) + ')';
+    setTransform(plxClouds, 'translate(' + px(-mx * 60) + ', ' + px(-my * 14) + ')');
+    setTransform(plxCity, 'translate(-50%, 0) translate(' + px(-mx * 36) + ', ' + px(-my * 10) + ') rotate(' + (mx * 1.2).toFixed(2) + 'deg)');
+    setTransform(plxStars, 'translate(' + px(-mx * 18) + ', ' + px(-my * 8) + ')');
+    setTransform(plxFront, 'translate(' + px(mx * 8) + ', ' + px(my * 4) + ')');
     var ang = mx === 0 && my === 0 ? 0 : Math.round((Math.atan2(-my, mx) * 180 / Math.PI + 360) % 360) % 360;
     setText(sceneAngle, String(ang));
   }
@@ -100,11 +104,11 @@
     if (plxRaf) cancelAnimationFrame(plxRaf);
     plxRaf = 0;
     plxPend = null;
-    [plxClouds, plxStars, plxCity, plxFront].forEach(function (el) { el.style.transform = ''; });
+    [plxClouds, plxStars, plxCity, plxFront].forEach(function (el) { setTransform(el, ''); });
     setText(sceneAngle, '0');
   }
 
-  if (scene && plxClouds && plxStars && plxCity && plxFront && sceneAngle) {
+  if (scene && (plxClouds || plxStars || plxCity || plxFront)) {
     // Pointer events para distinguir el mouse: en touch y lápiz la escena queda quieta
     scene.addEventListener('pointermove', function (e) {
       if (e.pointerType !== 'mouse' || reduced.matches) return;
@@ -176,6 +180,8 @@
   var rebuildBtn = document.getElementById('farm-rebuild');
   var nextEl = document.getElementById('farm-next');
   var nextHintEl = document.getElementById('farm-next-hint');
+  // Sin estos tres (HTML viejo) la piedra no explota: el clicker básico sigue andando igual
+  var canBoom = !!(boomEl && rubbleEl && rebuildBtn);
 
   var state = {
     tokens: 0,
@@ -226,6 +232,12 @@
       // Recarga en medio de la explosión: el bonus ya se cobró al explotar, quedan los escombros
       if (state.phase === 'boom') state.phase = 'rubble';
       if (state.phase === 'rubble') state.since = thresh(state.replicas);
+      // Escombros guardados pero sin botón para reconstruir: se reconstruye sola
+      if (state.phase !== 'ok' && !canBoom) {
+        state.phase = 'ok';
+        state.since = 0;
+        state.replicas += 1;
+      }
     } catch (e) { /* sin persistencia: arranca de cero */ }
   }
 
@@ -253,6 +265,14 @@
     return null;
   }
   function integ() { return Math.max(0, 1 - state.since / thresh(state.replicas)); }
+  // Un decimal redondeado hacia abajo: el primer token ya baja a 99,9%.
+  // 100% solo sin daño y 0% solo con la piedra explotada (el 1e-9 absorbe errores de coma flotante)
+  function pctText(i) {
+    if (state.phase !== 'ok') return '0%';
+    if (state.since <= 0) return '100%';
+    var v = Math.floor(i * 1000 + 1e-9) / 10;
+    return v.toLocaleString('es-AR', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + '%';
+  }
   function milestone(i) {
     if (state.phase === 'boom') return '¡BOOM! la Movediza explotó.';
     if (state.phase === 'rubble') return 'explotó (otra vez). el municipio te indemnizó con ' + fmt(bonus(state.replicas)) + ' tokens.';
@@ -268,13 +288,18 @@
     if (i <= 0.3) return '[WARN] grietas detectadas en la piedra';
     return '';
   }
+  // Celdas llenas hacia arriba: la barra pierde la primera celda al bajar de 13/14
+  // y la última recién al explotar
   function bar(i) {
-    var n = Math.round(i * 14);
+    var n = Math.max(0, Math.min(14, Math.ceil(i * 14 - 1e-9)));
     return new Array(n + 1).join('█') + new Array(14 - n + 1).join('░');
   }
 
   function setText(el, txt) {
     if (el && el.textContent !== txt) el.textContent = txt;
+  }
+  function toggle(el, cls, on) {
+    if (el) el.classList.toggle(cls, on);
   }
 
   // Todo ingreso (click o tick) pasa por acá; solo con la piedra en pie suma integridad perdida
@@ -283,7 +308,7 @@
     state.total += n;
     if (state.phase !== 'ok') return;
     state.since += n;
-    if (state.since >= thresh(state.replicas)) explode();
+    if (canBoom && state.since >= thresh(state.replicas)) explode();
   }
 
   function render() {
@@ -305,14 +330,14 @@
     });
 
     // Integridad: porcentaje, barra, aviso, color y temblor
-    setText(integPct, Math.round(i * 100) + '%');
+    setText(integPct, pctText(i));
     setText(integBar, bar(i));
     setText(integWarn, warnText(i));
     var low = !ok || i <= 0.2;
-    farmMain.classList.toggle('integ-mid', !low && i <= 0.5);
-    farmMain.classList.toggle('integ-low', low);
-    sway.classList.toggle('shake-2', ok && i <= 0.12);
-    sway.classList.toggle('shake-1', ok && i <= 0.3 && i > 0.12);
+    toggle(farmMain, 'integ-mid', !low && i <= 0.5);
+    toggle(farmMain, 'integ-low', low);
+    toggle(sway, 'shake-2', ok && i <= 0.12);
+    toggle(sway, 'shake-1', ok && i <= 0.3 && i > 0.12);
     setText(nextEl, 'réplica #' + (state.replicas + 1) + ' · multiplicador x' + (state.replicas + 2));
     setText(nextHintEl, 'la próxima aguanta hasta ' + fmt(thresh(state.replicas + 1)) + ' tokens.');
 
@@ -387,13 +412,14 @@
   function showPhase() {
     var ph = state.phase;
     rockBtn.hidden = ph !== 'ok';
-    boomEl.hidden = ph !== 'boom';
-    rubbleEl.hidden = ph !== 'rubble';
+    if (boomEl) boomEl.hidden = ph !== 'boom';
+    if (rubbleEl) rubbleEl.hidden = ph !== 'rubble';
     stage.classList.toggle('is-boom', ph === 'boom');
   }
 
   // Cada carácter de la mini piedra (48) pasa a ser un fragmento que sale volando
   function buildFrags() {
+    if (!boomFrags) return;
     var frag = document.createDocumentFragment();
     stoneRows.forEach(function (l, y) {
       for (var x = 0; x < l.length; x++) {
@@ -426,7 +452,7 @@
 
   // Al pasar a escombros no queda ningún nodo de la explosión colgado
   function clearBoom() {
-    boomFrags.textContent = '';
+    if (boomFrags) boomFrags.textContent = '';
     stage.querySelectorAll('.token, .plus').forEach(function (el) { stage.removeChild(el); });
   }
 
@@ -454,8 +480,8 @@
     }, reduced.matches ? BOOM_MS_REDUCED : BOOM_MS);
   }
 
-  if (stage && rockBtn && stone && farmMain && sway && integPct && integBar && integWarn &&
-      boomEl && boomFrags && rubbleEl && rebuildBtn && nextEl && nextHintEl) {
+  // Lo único imprescindible es la piedra: integridad, explosión y escombros son opcionales
+  if (stage && rockBtn && stone) {
     load();
 
     rockBtn.addEventListener('click', function () {
@@ -469,7 +495,7 @@
       render();
     });
 
-    rebuildBtn.addEventListener('click', function () {
+    if (rebuildBtn) rebuildBtn.addEventListener('click', function () {
       if (state.phase !== 'rubble') return;
       state.phase = 'ok';
       state.since = 0;
